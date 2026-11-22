@@ -1,5 +1,5 @@
-import { Camera, FlaskConical, GraduationCap, Leaf, ShieldCheck, Droplets, Sparkles, Wind } from 'lucide-react'
-import { BodyCamCard } from './BodyCamCard'
+import { Camera, FlaskConical, GraduationCap, Leaf, ShieldCheck, Droplets, Sparkles, Wind, Play } from 'lucide-react'
+import { useState } from 'react'
 
 const FEATURES = [
   {
@@ -27,6 +27,10 @@ const INGREDIENTS = [
 ]
 
 export function WhyUs() {
+  const [playing, setPlaying] = useState(false)
+
+  // Replace this with your actual YouTube video ID or hosted video URL
+  const YOUTUBE_ID = 'dQw4w9WgXcQ' // 👈 swap in your real demo video ID
   return (
     <>
       <section id="services" className="bg-white py-20 sm:py-28">
@@ -57,9 +61,55 @@ export function WhyUs() {
           </div>
 
           <div className="mx-auto w-full max-w-md lg:max-w-none">
-            <BodyCamCard />
+            {/* Demo Video */}
+            <div className="relative overflow-hidden rounded-3xl bg-forest shadow-lift">
+              {playing ? (
+                <iframe
+                  className="aspect-video w-full"
+                  src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
+                  title="Eco Cleaners BD – demo video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPlaying(true)}
+                  className="group relative flex aspect-video w-full items-center justify-center bg-forest"
+                  aria-label="Play demo video"
+                >
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-forest via-forest/80 to-leaf/40" />
+
+                  {/* Animated leaf background blobs */}
+                  <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+                    <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-leaf/20 blur-2xl" />
+                    <div className="absolute -bottom-10 -left-10 h-48 w-48 rounded-full bg-leaf/10 blur-2xl" />
+                  </div>
+
+                  {/* Text content */}
+                  <div className="relative z-10 flex flex-col items-center gap-5 px-6 text-center">
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="font-display text-xs font-bold uppercase tracking-widest text-leaf">
+                        Watch how it works
+                      </span>
+                      <p className="font-display text-xl font-extrabold text-white sm:text-2xl">
+                        Live body-cam. Eco products.<br />Your home, fully transparent.
+                      </p>
+                    </div>
+
+                    {/* Play button */}
+                    <span className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-lift transition duration-300 group-hover:scale-110 group-hover:bg-leaf">
+                      <Play className="h-6 w-6 translate-x-0.5 text-forest" aria-hidden fill="currentColor" />
+                    </span>
+
+                    <span className="text-xs text-white/60">2 min demo</span>
+                  </div>
+                </button>
+              )}
+            </div>
             <p className="mt-3 text-center text-xs text-slate-500">
-              Illustrative preview of the live status card you will see on your phone.
+              See a real Eco Cleaners BD visit — from arrival to sparkling finish.
             </p>
           </div>
         </div>
